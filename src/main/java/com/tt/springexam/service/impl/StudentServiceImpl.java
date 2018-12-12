@@ -23,4 +23,16 @@ public class StudentServiceImpl implements StudentService {
     public Student add(Student student) {
         return studentRepository.save(student);
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void delete(Student student) throws Exception {
+        studentRepository.delete(student);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public Student findByName(String name) throws Exception {
+        return studentRepository.findStudentBySName(name);
+    }
 }

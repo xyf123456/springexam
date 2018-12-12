@@ -8,5 +8,25 @@ import com.tt.springexam.pojo.User;
  */
 public interface StudentService {
 
-    Student add(Student student);
+    /**
+     * @ Description: 添加学生
+     * @params: * @Param: student
+     * @return:com.tt.springexam.pojo.Student
+     **/
+    Student add(Student student) throws Exception;
+
+    /**
+     * @ Description:删除学生
+     * @params:  * @Param: student
+     * @return:void
+     **/
+    void delete(Student student) throws Exception;
+
+    /**
+     * @ Description: 根据名称查找到学生
+     * @params:  * @Param: name
+     * @return:com.tt.springexam.pojo.Student
+     **/
+    Student findByName(String name) throws Exception;
+
 }

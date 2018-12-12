@@ -8,6 +8,7 @@ import java.util.Set;
 
 /**
  * 学生实体类
+ * (Student为关系维护方，Course为被维护方。)
  */
 @Entity
 public class Student {
