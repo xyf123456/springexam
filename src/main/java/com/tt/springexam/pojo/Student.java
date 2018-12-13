@@ -18,8 +18,13 @@ public class Student {
     private String id;
     private String sName;
 
+    //    和课程的关系为多对多
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Course> courses = new HashSet<>();
+
+    //    和班级的关系为多对一
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ClassEntity classEntity;
 
     public Student() {
     }
@@ -46,5 +51,13 @@ public class Student {
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    public ClassEntity getClassEntity() {
+        return classEntity;
+    }
+
+    public void setClassEntity(ClassEntity classEntity) {
+        this.classEntity = classEntity;
     }
 }

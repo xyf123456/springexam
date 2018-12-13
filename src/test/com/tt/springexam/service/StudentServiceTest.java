@@ -1,5 +1,6 @@
 package com.tt.springexam.service;
 
+import com.tt.springexam.pojo.ClassEntity;
 import com.tt.springexam.pojo.Course;
 import com.tt.springexam.pojo.Student;
 import org.junit.After;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -34,6 +38,9 @@ public class StudentServiceTest {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private ClassService classService;
     /**
      * @ Description:仅将被维护方对象添加进维护方对象Set中
      * 保存维护方对象
@@ -92,6 +99,17 @@ public class StudentServiceTest {
         courseService.add(c);
     }
 
+    @Test
+    public void add4() throws Exception {
+        Student s1 = new Student();
+        s1.setsName("学生4");
+        ClassEntity c  = new ClassEntity();
+        c.setcName("二班");
+        c.getStudents().add(s1);
+//        s1.setClassEntity(c);
+        classService.add(c);
+    }
+
     /**
      * @ Description: 删除维护方对象
      * 因此，在删除的时候也只删除了course中的数据。
@@ -100,7 +118,7 @@ public class StudentServiceTest {
      **/
     @Test
     public void delStu() throws Exception {
-        Student student=studentService.findByName("学生2");
+        Student student=studentService.findByName("学生3");
         studentService.delete(student);
     }
 
@@ -111,10 +129,20 @@ public class StudentServiceTest {
      **/
     @Test
     public void delCourse() throws Exception {
-        Course course=courseService.findByName("数学");
+        Course course=courseService.findByName("英语");
         courseService.delete(course);
     }
 
-
+    /**
+     * @ Description: 删除班级（通过一对多和多对一的关系，设置CascadeType.ALL权限后，可删除掉
+     * 班级下的学生）
+     * @params:  * @Param:
+     * @return:void
+     **/
+    @Test
+    public void delClass() throws Exception {
+        ClassEntity classEntity=classService.findByName("二班");
+        classService.delete(classEntity);
+    }
 
 }
